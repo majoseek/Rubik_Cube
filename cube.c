@@ -12,8 +12,7 @@ void print_down_up_wall(int arr[6][N][N],int up_down) //funkcja wypisuje sciane 
             putchar(' ');
         for(int k=0;k<N;k++)
             printf("%d",arr[up_down][w][k]);
-        for(int i=0;i<N+1;i++)
-            putchar(' ');
+
 
     }
 }
@@ -133,33 +132,32 @@ void rotate(int wall,int layer,int cube[6][N][N])  //funkcja obracajaca kostke c
     }
     else if(wall==2)   //przednia sciana
     {
-       
-            for(int w=0;w<N;w++)
-                for(int k=0;k<layer;k++)
-                {
-                    array_right[w][k]=cube[0][N-1-k][w];
-                    array_left[w][N-1-k]=cube[5][k][w];
-                }
-            for(int w=0;w<layer;w++)
-                for(int k=0;k<N;k++)
-                {
-                    array_up[N-1-w][k]=cube[1][k][N-1-w];
-                    array_down[w][k]=cube[3][k][w];
-                }
+        for(int w=0;w<N;w++)
+            for(int k=0;k<layer;k++)
+            {
+                array_right[w][k]=cube[0][N-1-k][w];
+                array_left[w][N-1-k]=cube[5][k][w];
+            }
+        for(int w=0;w<layer;w++)
+            for(int k=0;k<N;k++)
+            {
+                array_up[N-1-w][k]=cube[1][k][N-1-w];
+                array_down[w][k]=cube[3][k][w];
+            }
 
-            for(int w=0;w<N;w++)
-                for(int k=0;k<layer;k++)
-                {
-                    cube[3][w][k]=array_right[w][k];
-                    cube[1][w][N-1-k]=array_left[w][N-1-k];
-                }
+        for(int w=0;w<N;w++)
+            for(int k=0;k<layer;k++)
+            {
+                cube[3][w][k]=array_right[w][k];
+                cube[1][w][N-1-k]=array_left[w][N-1-k];
+            }
 
-            for(int w=0;w<layer;w++)
-                for(int k=0;k<N;k++)
+        for(int w=0;w<layer;w++)
+            for(int k=0;k<N;k++)
                 {
-                    cube[0][N-1-w][k]=array_up[N-1-w][k];
-                    cube[5][w][k]=array_down[w][k];
-                }
+                cube[0][N-1-w][k]=array_up[N-1-w][k];
+                cube[5][w][k]=array_down[w][k];
+            }
         
     }
     else if(wall==3)    //prawa sciana
@@ -167,19 +165,19 @@ void rotate(int wall,int layer,int cube[6][N][N])  //funkcja obracajaca kostke c
         for(int w=0;w<N;w++)
             for(int k=0;k<layer;k++)
             {
-                array_up[w][N-1-k]=cube[2][w][N-1-k];
-                array_back[w][k]=cube[0][w][N-1-k];
-                array_down[w][N-1-k]=cube[4][w][k];
-                array_front[w][N-1-k]=cube[5][w][N-1-k];
+                array_up[N-w-1][N-1-k]=cube[2][w][N-1-k];
+                array_back[N-w-1][k]=cube[0][N-1-w][N-1-k];
+                array_down[w][N-k-1]=cube[4][w][k];
+                array_front[N-w-1][N-1-k]=cube[5][w][N-k-1];
             }
 
         for(int w=0;w<N;w++)
             for(int k=0;k<layer;k++)
             {
-                cube[0][w][N-1-k]=array_up[w][N-1-k];
-                cube[4][w][k]=array_back[w][k];
-                cube[5][w][N-1-k]=array_down[w][N-1-k];
-                cube[2][w][N-1-k]=array_front[w][N-1-k];
+                cube[0][N-w-1][N-1-k]=array_up[N-w-1][N-1-k];
+                cube[4][N-w-1][k]=array_back[N-w-1][k];
+                cube[5][w][N-k-1]=array_down[w][N-k-1];
+                cube[2][N-w-1][N-1-k]=array_front[N-w-1][N-1-k];
             }    
     }
     else if(wall==4)    //tylnia sciana
@@ -190,25 +188,25 @@ void rotate(int wall,int layer,int cube[6][N][N])  //funkcja obracajaca kostke c
                     array_up[w][k]=cube[3][k][N-1-w];
                     array_down[w][k]=cube[1][k][w];
                 }
-            for(int w=0;w<N;w++)
-                for(int k=0;k<layer;k++)
-                {
-                    array_right[w][N-1-k]=cube[5][k][w];
-                    array_left[w][k]=cube[0][k][w];
-                }
+        for(int w=0;w<N;w++)
+            for(int k=0;k<layer;k++)
+            {
+                array_right[w][N-1-k]=cube[5][k][w];
+                array_left[w][k]=cube[0][k][w];
+            }
 
-            for(int w=0;w<layer;w++)
-                for(int k=0;k<N;k++)
-                {
-                    cube[0][w][k]=array_up[w][k];
-                    cube[5][w][k]=array_down[w][k];
-                }
-            for(int w=0;w<N;w++)
-                for(int k=0;k<layer;k++)
-                {
-                    cube[3][w][N-1-k]=array_right[w][N-1-k];
-                    cube[1][w][k]=array_left[w][k];
-                }
+        for(int w=0;w<layer;w++)
+            for(int k=0;k<N;k++)
+            {
+                cube[0][w][k]=array_up[w][k];
+                cube[5][w][k]=array_down[w][k];
+            }
+        for(int w=0;w<N;w++)
+            for(int k=0;k<layer;k++)
+            {
+                cube[3][w][N-1-k]=array_right[w][N-1-k];
+                cube[1][w][k]=array_left[w][k];
+            }
     }
     else if(wall==5)    //dolna sciana
     {
